@@ -116,18 +116,47 @@ Yes, so long as those are IN ADDITION TO Express, MongoDB, and a CSS framework o
 Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
 ---
 
-## Your Web Application Title
+## Coffee-Themed To-Do List
+AI Usage Note: I used ChatGPT to learn and become familar with Express and MongoDB API. I asked it to give me examples of functions I read from Express documentation like res.sendFile() or to explain functions like express.json(). I also asked it to explain MongoDB functions like findOneAndUpdate() vs updateOne() or res.params.id vs res.params._id.
 
 Your Render (or alternative server) link e.g. http://a3-joshua-cuneo.render.me
 
-Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
+### To run: 
+node --env-file=.env server.js
+or 
+npm start
 
+Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
+### Goal
+The goal of my application is a coffee-themed to-do list where users can add, delete, and edit tasks. The tasks are stored in a database that the server is connected to.
 - the goal of the application
+
+### Challenges
+1. I had some minor struggles with connecting my server to the database. I realized I needed to connect my .env file using the run command stated above.
+2. It was a learning curve getting used to Express and MongoDB and their APIs. I had to Google and ask ChatGPT about concepts like req.params, Object ids, or res.sendFile() to learn how to use them.
+3. As I was refactoring my code from a2, I spent a lot of my time debugging, solving bugs ranging from the date displaying in a different timezone to the edit form not saving.
+4. 
+
 - challenges you faced in realizing the application
+
+### Authentication Strategy
 - what authentication strategy you chose to use and why (choosing one because it seemed the easiest to implement is perfectly acceptable)
+
+### CSS Framework
 - what CSS framework you used and why
   - include any modifications to the CSS framework you made via custom CSS you authored
+
+### Express Middleware Packages
 - a list of Express middleware packages you used and a short (one sentence) summary of what each one does. If you use a custom function, please add a little more detail about what it does.
+- express.json(): parses JSON data and stores parsed object in req.body
+- express.static("public"): serves static files from the "public" folder
+- middleware_db_check: checks to make sure database is connected
+- app.get("/tasks", ...): gets all the tasks from the database
+- app.get("/task/:id", ...): get the task with the parameter id
+- app.post("/add", ...): gets the task-related information from the client-side add form, calculates the daysUntilDue, adds daysUntilDue to the new task, and inserts the new task into the database
+- app.put("/update/:id", ...): gets the task-related information from the client-side edit form, recalculates the daysUntilDue, finds the task with the parameter id, updates the information in the database, and sends the updated task to the front-end
+- app.delete( '/delete/:id', ...): deletes the task with the parameter id from the database
+
 
 ## Technical Achievements
 - **Tech Achievement 1**: I used OAuth authentication via the GitHub strategy
