@@ -55,8 +55,6 @@ middleware_db_check = (req, res, next) => {
 };
 app.use(middleware_db_check);
 
-
-
 // calculates days left until task due
 function calculateDaysDue(dueDateStr) {
     if (!dueDateStr) return null; 
@@ -98,7 +96,6 @@ app.post("/add", async (req, res) => {
 
     // calculate daysUntilDue
     const daysUntilDue = calculateDaysDue(dueDate);
-    console.log("days left: ", daysUntilDue);
 
     // create task with daysUntilDue and insert into db
     const task = { title, description, dueDate, daysUntilDue };

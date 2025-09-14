@@ -1,4 +1,5 @@
 // FRONT-END (CLIENT) JAVASCRIPT HERE
+
 function formatDate(dateStr) {
     if (!dateStr) {
         return "";
@@ -27,7 +28,7 @@ const deleteTask = async function (event) {
     if (event.target.classList.contains("delete-btn")) {
         const li = event.target.closest("li");
         const taskID = li.dataset.id;
-       
+
         const response = await fetch(`/delete/${taskID}`, {
             method: "DELETE"
         });
@@ -39,25 +40,40 @@ const deleteTask = async function (event) {
     }
 };
 
-function showEditForm (li, task) {
+function showEditForm(li, task) {
     let dateStr = "";
-    if(task.dueDate) {
+    if (task.dueDate) {
         const date = new Date(task.dueDate);
         dateStr = date.toISOString().split("T")[0];
     }
-
+    
     li.innerHTML = `
-        <div id="edit-form">
-            <input type="text" id="edit-title" class="title" value="${task.title}" placeholder="Title" />
-            <input type="text" id="edit-description" class="description" value="${task.description}" placeholder="Description" />
-            <input type="date" id="edit-due" class="dueDate" value="${dateStr}" />
-            <button class="save-btn">Save</button>
-            <button class="cancel-btn">Cancel</button>
-        </div>
+        <form class="row g-2 align-items-stretch" id="edit-form">
+            <div class="col-12 col-lg-3 d-flex flex-column">
+                <label class="fw-bold small" for="edit-title">Task Title</label>
+                <input type="text" class="form-control form-control-md flex-grow-1 title" id="edit-title" value="${task.title}">
+            </div>
+
+            <div class="col-12 col-lg-4 d-flex flex-column">
+                <label class="fw-bold small" for="edit-description">Task Description</label>
+                <textarea class="form-control form-control-md flex-grow-1 description" id="edit-description">${task.description}</textarea>
+            </div>
+
+            <div class="col-12 col-lg-2 d-flex flex-column">
+                <label class="fw-bold small" for="edit-due">Task Due Date</label>
+                <input type="date" class="form-control form-control-md flex-grow-1 dueDate" id="edit-due" value="${dateStr}">
+            </div>
+
+            <div class="col-12 col-lg-3 d-flex align-items-center justify-content-end gap-1">
+                <button class="btn btn-sm btn-font btn-org save-btn">Save</button>
+                <button class="btn btn-sm btn-danger btn-font btn-red cancel-btn">Cancel</button>
+            </div>
+
+        </form>
     `;
 }
 
-async function saveEdit (li) {
+async function saveEdit(li) {
     const updatedTask = {
         title: li.querySelector("#edit-title").value,
         description: li.querySelector("#edit-description").value,
@@ -74,51 +90,59 @@ async function saveEdit (li) {
 
     const task = await response.json();
 
-    console.log("task from server:", task);
-    console.log("task dat:", task.dueDate);
-
     li.innerHTML = `
-        <span class="title-text">${task.title}</span>
-        ${
-            task.description
-                ? `:
-            ${task.description}`
-                : ""
-        }
-        <div class="due-date">
-            ${
-                task.dueDate
-                    ? `(Due ${formatDate(task.dueDate)}) 
-                <span class="counter">Days Until Due: </span> ${
-                    task.daysUntilDue
-                }`
-                    : ""
-            }
-        </div>
-        <div class="btn-group">
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex flex-column flex-grow-1">
+                <div class="d-flex align-items-center">
+                    <span class="bullet me-2">☕</span>
+                    <span class="fw-bold">${task.title}</span>
+                    ${task.description ? `: ${task.description}` : ""}
+                </div>
+                ${
+                    task.dueDate
+                        ? `<div class="small ms-4">(Due ${formatDate(
+                              task.dueDate
+                          )}) 
+                                        <span class="counter ms-2">Days Until Due: ${
+                                            task.daysUntilDue
+                                        }</span>
+                                </div>`
+                        : ""
+                }
+            </div>
+            <div class="d-flex align-items-center gap-1">
+                <button class="btn btn-sm btn-font btn-org edit-btn">Edit</button>
+                <button class="btn btn-sm btn-danger btn-font btn-red delete-btn">Delete</button>
+            </div>
         </div>
     `;
 }
 
-function cancelEdit (li, task) {
+function cancelEdit(li, task) {
     li.innerHTML = `
-        <span class="title-text">${task.title}</span>
-        ${task.description ? `: ${task.description}` : ""}
-        <div class="due-date">
-            ${
-                task.dueDate
-                    ? `(Due ${formatDate(task.dueDate)}) 
-                <span class="counter">Days Until Due: </span> ${
-                    task.daysUntilDue
-                }`
-                    : ""
-            }
-        </div>
-        <div class="btn-group">
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex flex-column flex-grow-1">
+                <div class="d-flex align-items-center">
+                    <span class="bullet me-2">☕</span>
+                    <span class="fw-bold">${task.title}</span>
+                    ${task.description ? `: ${task.description}` : ""}
+                </div>
+                ${
+                    task.dueDate
+                        ? `<div class="small ms-4">(Due ${formatDate(
+                            task.dueDate
+                        )}) 
+                                        <span class="counter ms-2">Days Until Due: ${
+                                            task.daysUntilDue
+                                        }</span>
+                                </div>`
+                        : ""
+                }
+            </div>
+            <div class="d-flex align-items-center gap-1">
+                <button class="btn btn-sm btn-font btn-org edit-btn">Edit</button>
+                <button class="btn btn-sm btn-danger btn-font btn-red delete-btn">Delete</button>
+            </div>
         </div>
     `;
 }
@@ -127,7 +151,7 @@ const editTask = async function (event) {
     event.preventDefault();
     const li = event.target.closest("li"),
         taskID = li.dataset.id;
-    
+
     const response = await fetch(`/tasks/${taskID}`);
     const task = await response.json();
 
@@ -170,22 +194,30 @@ const submit = async function (event) {
 
     const task = await response.json()
     tasks.innerHTML += `
-        <li data-id="${task._id}" class="list-item">
-            <span class="title-text">${task.title}</span>
-            ${task.description ? `:  ${task.description}` : ""}
-            <div class="due-date">
-                ${
-                    task.dueDate
-                        ? `(Due ${formatDate(task.dueDate)}) 
-                    <span class="counter">Days Until Due: </span> ${
-                        task.daysUntilDue
-                    }`
-                        : ""
-                }
-            </div>
-            <div class="btn-group">
-                <button class="edit-btn">Edit</button>
-                <button class="delete-btn">Delete</button>
+        <li data-id="${task._id}" class="list-group-item list-bg">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex flex-column flex-grow-1">
+                    <div class="d-flex align-items-center">
+                        <span class="bullet me-2">☕</span>
+                        <span class="fw-bold">${task.title}</span>
+                        ${task.description ? `: ${task.description}` : ""}
+                    </div>
+                    ${
+                        task.dueDate
+                            ? `<div class="small ms-4">(Due ${formatDate(
+                                task.dueDate
+                            )}) 
+                                            <span class="counter ms-2">Days Until Due: ${
+                                                task.daysUntilDue
+                                            }</span>
+                                    </div>`
+                            : ""
+                    }
+                </div>
+                <div class="d-flex align-items-center gap-1">
+                    <button class="btn btn-sm btn-font btn-org edit-btn">Edit</button>
+                    <button class="btn btn-sm btn-danger btn-font btn-red delete-btn">Delete</button>
+                </div>
             </div>
         </li>
     `;
@@ -197,9 +229,6 @@ const submit = async function (event) {
 
     // const text = await response.text()
     // console.log( "text:", text)
-
-    tasks.addEventListener("click", deleteTask)
-    tasks.addEventListener("click", editTask)
 };
 
 
@@ -214,26 +243,35 @@ window.onload = async function () {
     // get tasks from server
     const response = await fetch("/tasks");
     const tasks = await response.json();
-    console.log("tasks: ", tasks);
 
     tasks.forEach((task) => {
         tasksList.innerHTML += `
-            <li data-id="${task._id}" class="list-item">
-                <span class="title-text">${task.title}</span>
-                ${task.description ? `:  ${task.description}` : ""}
-                <div class="due-date">
-                    ${
-                        task.dueDate
-                            ? `(Due ${formatDate(task.dueDate)}) 
-                        <span class="counter">Days Until Due: </span> ${
-                            task.daysUntilDue
-                        }`
-                            : ""
-                    }
-                </div>
-                <div class="btn-group">
-                    <button class="edit-btn">Edit</button>
-                    <button class="delete-btn">Delete</button>
+            <li data-id="${
+                task._id
+            }" class="list-group-item list-bg">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-column flex-grow-1">
+                        <div class="d-flex align-items-center">
+                            <span class="bullet me-2">☕</span>
+                            <span class="fw-bold">${task.title}</span>
+                            ${task.description ? `: ${task.description}` : ""}
+                        </div>
+                        ${
+                            task.dueDate
+                                ? `<div class="small ms-4">(Due ${formatDate(
+                                    task.dueDate
+                                )}) 
+                                                <span class="counter ms-2">Days Until Due: ${
+                                                    task.daysUntilDue
+                                                }</span>
+                                        </div>`
+                                : ""
+                        }
+                    </div>
+                    <div class="d-flex align-items-center gap-1">
+                        <button class="btn btn-sm btn-font btn-org edit-btn">Edit</button>
+                        <button class="btn btn-sm btn-danger btn-font btn-red delete-btn">Delete</button>
+                    </div>
                 </div>
             </li>
         `;
@@ -241,4 +279,5 @@ window.onload = async function () {
 
     tasksList.addEventListener("click", deleteTask);
     tasksList.addEventListener("click", editTask);
+
 };
