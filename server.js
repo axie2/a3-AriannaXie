@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require("express"),
     passport = require("passport"),
     session = require("express-session"),
@@ -106,7 +108,8 @@ app.get("/", ensureAuthenticated, (req, res) => {
 // get tasks from db
 app.get("/tasks", ensureAuthenticated, async (req, res) => {
     try {
-        const tasks = await collection.find({}).toArray();
+        const userId = req.user.id;
+        const tasks = await collection.find({ userId }).toArray();
         res.json(tasks);
     } catch (err) {
         console.error(err);
@@ -135,7 +138,13 @@ app.post("/add", ensureAuthenticated, async (req, res) => {
     const daysUntilDue = calculateDaysDue(dueDate);
 
     // create task with daysUntilDue and insert into db
-    const task = { title, description, dueDate, daysUntilDue };
+    const task = {
+        title,
+        description,
+        dueDate,
+        daysUntilDue,
+        userId: req.user.id,
+    };
     const result = await collection.insertOne(task);
     
     const insertedTask = { _id: result.insertedId, ...task };
