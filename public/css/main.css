@@ -86,3 +86,8 @@ body {
 .form-control {
     background-color: rgb(255, 250, 246);
 }
+
+.box-width {
+    width: 400px;
+}
+
