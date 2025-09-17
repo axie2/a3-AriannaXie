@@ -124,7 +124,7 @@ async function saveEdit(li) {
                         : ""
                 }
             </div>
-            <div class="d-flex align-items-center gap-1">
+            <div class="d-flex flex-column flex-sm-row align-items-center gap-1">
                 <button class="btn btn-sm btn-font btn-org edit-btn">Edit</button>
                 <button class="btn btn-sm btn-danger btn-font btn-red delete-btn">Delete</button>
             </div>
@@ -144,8 +144,8 @@ function cancelEdit(li, task) {
                 ${
                     task.dueDate
                         ? `<div class="small ms-4">(Due ${formatDate(
-                            task.dueDate
-                        )}) 
+                              task.dueDate
+                          )}) 
                                         <span class="counter ms-2">Days Until Due: ${
                                             task.daysUntilDue
                                         }</span>
@@ -153,7 +153,7 @@ function cancelEdit(li, task) {
                         : ""
                 }
             </div>
-            <div class="d-flex align-items-center gap-1">
+            <div class="d-flex flex-column flex-sm-row align-items-center gap-1">
                 <button class="btn btn-sm btn-font btn-org edit-btn">Edit</button>
                 <button class="btn btn-sm btn-danger btn-font btn-red delete-btn">Delete</button>
             </div>
@@ -232,8 +232,8 @@ const submit = async function (event) {
                     ${
                         task.dueDate
                             ? `<div class="small ms-4">(Due ${formatDate(
-                                task.dueDate
-                            )}) 
+                                  task.dueDate
+                              )}) 
                                             <span class="counter ms-2">Days Until Due: ${
                                                 task.daysUntilDue
                                             }</span>
@@ -241,7 +241,7 @@ const submit = async function (event) {
                             : ""
                     }
                 </div>
-                <div class="d-flex align-items-center gap-1">
+                <div class="d-flex flex-column flex-sm-row align-items-center gap-1">
                     <button class="btn btn-sm btn-font btn-org edit-btn">Edit</button>
                     <button class="btn btn-sm btn-danger btn-font btn-red delete-btn">Delete</button>
                 </div>
@@ -273,9 +273,7 @@ window.onload = async function () {
 
     tasks.forEach((task) => {
         tasksList.innerHTML += `
-            <li data-id="${
-                task._id
-            }" class="list-group-item list-bg">
+            <li data-id="${task._id}" class="list-group-item list-bg">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex flex-column flex-grow-1">
                         <div class="d-flex align-items-center">
@@ -286,8 +284,8 @@ window.onload = async function () {
                         ${
                             task.dueDate
                                 ? `<div class="small ms-4">(Due ${formatDate(
-                                    task.dueDate
-                                )}) 
+                                      task.dueDate
+                                  )}) 
                                                 <span class="counter ms-2">Days Until Due: ${
                                                     task.daysUntilDue
                                                 }</span>
@@ -295,7 +293,7 @@ window.onload = async function () {
                                 : ""
                         }
                     </div>
-                    <div class="d-flex align-items-center gap-1">
+                    <div class="d-flex flex-column flex-sm-row align-items-center gap-1">
                         <button class="btn btn-sm btn-font btn-org edit-btn">Edit</button>
                         <button class="btn btn-sm btn-danger btn-font btn-red delete-btn">Delete</button>
                     </div>
