@@ -1,4 +1,6 @@
-require('dotenv').config();
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config();
+}
 
 const express = require("express"),
     passport = require("passport"),
@@ -8,7 +10,7 @@ const express = require("express"),
     app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // session middleware to store and add user sessions for Auth0
@@ -33,7 +35,6 @@ function ensureAuthenticated(req, res, next) {
     }
     res.redirect("/login.html");
 }
-
 
 // DATABASE CONNECTION
 const { ObjectId } = require("mongodb");
@@ -73,7 +74,6 @@ async function run() {
         console.error(err);
         await client.close();
     }
-
 }
 run().catch(console.dir);
 
@@ -87,11 +87,10 @@ middleware_db_check = (req, res, next) => {
 };
 app.use(middleware_db_check);
 
-
 // ROUTES
 // calculates days left until task due
 function calculateDaysDue(dueDateStr) {
-    if (!dueDateStr) return null; 
+    if (!dueDateStr) return null;
 
     const today = new Date();
     const dueDate = new Date(dueDateStr);
@@ -115,13 +114,13 @@ app.get("/tasks", ensureAuthenticated, async (req, res) => {
         console.error(err);
         res.status(500).json({ error: "Failed to fetch tasks." });
     }
-})
+});
 
 // get a single task from db
 app.get("/tasks/:id", ensureAuthenticated, async (req, res) => {
     try {
         const taskID = req.params.id;
-        const task = await collection.findOne({_id: new ObjectId(taskID)})
+        const task = await collection.findOne({ _id: new ObjectId(taskID) });
         res.json(task);
     } catch (err) {
         console.error(err);
@@ -146,7 +145,7 @@ app.post("/add", ensureAuthenticated, async (req, res) => {
         userId: req.user.id,
     };
     const result = await collection.insertOne(task);
-    
+
     const insertedTask = { _id: result.insertedId, ...task };
     res.json(insertedTask);
 });
@@ -168,12 +167,12 @@ app.put("/update/:id", ensureAuthenticated, async (req, res) => {
 
 // remove a task
 // assumes req.body takes form { _id:5d91fb30f3f81b282d7be0dd } etc.
-app.delete("/delete/:id", ensureAuthenticated, async (req,res) => {
+app.delete("/delete/:id", ensureAuthenticated, async (req, res) => {
     const result = await collection.deleteOne({
         _id: new ObjectId(req.params.id),
     });
-    
-    res.json( { success: result.deletedCount === 1 } );
-})
+
+    res.json({ success: result.deletedCount === 1 });
+});
 
 app.listen(process.env.PORT || 3000);

@@ -136,6 +136,7 @@ The goal of my application is a coffee-themed to-do list where users can log in,
 3. As I was refactoring my code from a2, I spent a lot of my time debugging, solving bugs ranging from the date displaying in a different timezone to the edit form not saving.
 4. When it came to styling, I had to Google how to install and use Bootstrap. I frequently referenced the Bootstrap documentation.
 5. I had to refer to Auth0 and Passport documentation to implement Auth0 into my application. I also had to Google how to add GitHub as an option for Auth0 sign in.
+6. When deploying my app to Railway, it kept crashing, and I realized it was because I had defined a start script for "node --env-file=.env server.js" and I had to take out the .env.
 
 ### Authentication Strategy
 - I chose to use Auth0 because it was mentioned in the assignment instructions and I had used it for Software Engineering.
