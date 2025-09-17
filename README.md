@@ -115,16 +115,15 @@ Yes, so long as those are IN ADDITION TO Express, MongoDB, and a CSS framework o
 
 Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
 ---
+Arianna Xie
+
+Render link: https://a3-ariannaxie.onrender.com
 
 ## Coffee-Themed To-Do List
 AI Usage Note: I used ChatGPT to learn and become familar with Express and MongoDB API. I asked it to give me examples of functions I read from Express documentation like res.sendFile() or to explain functions like express.json(). I also asked it to explain MongoDB functions like findOneAndUpdate() vs updateOne() or res.params.id vs res.params._id.
 
-Your Render (or alternative server) link e.g. http://a3-joshua-cuneo.render.me
-
-### To run: 
+### To run (locally): 
 node --env-file=.env server.js
-or 
-npm start
 
 Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
 ### Goal
