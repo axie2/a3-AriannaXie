@@ -77,7 +77,8 @@ The goal of my application is a coffee-themed to-do list where users can log in,
 12. Help users avoid and correct mistakes: I added validation messages to the date field, to tell users that they can't add a date that's in the past.
 ![Date Validation](./readme_images/DateValidation.png)
 
-- **CRAP Design Principles**
+
+- **Design Achievement 2**: CRAP Design Principles
 Which element received the most emphasis (contrast) on each page? How did you use proximity to organize the visual information on your page? What design elements (colors, fonts, layouts, etc.) did you use repeatedly throughout your site? How did you use alignment to organize information and/or increase contrast for particular elements. Write a paragraph of at least 125 words *for each of four principles* (four paragraphs, 500 words in total).
 ![Application Overview](./readme_images/ApplicationOverview.png)
 ***Contrast***
