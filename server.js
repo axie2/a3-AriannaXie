@@ -109,7 +109,10 @@ app.get("/", ensureAuthenticated, (req, res) => {
 app.get("/tasks", ensureAuthenticated, async (req, res) => {
     try {
         const userId = req.user.id;
-        const tasks = await collection.find({ userId }).toArray();
+        const tasks = await collection
+            .find({ userId })
+            .sort({ dueDate: 1 }) // sort by due date
+            .toArray();
         res.json(tasks);
     } catch (err) {
         console.error(err);

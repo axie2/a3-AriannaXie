@@ -78,9 +78,11 @@ async function saveEdit(li) {
     const title = li.querySelector("#edit-title").value;
     const description = li.querySelector("#edit-description").value;
     const dueDate = new Date(li.querySelector("#edit-due").value);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
     // Show error message if due date is in the past
-    if (dueDate && dueDate < new Date()) {
+    if (dueDate && dueDate.setHours(0, 0, 0, 0) < today) {
         const message = document.createElement("p");
         message.className = "error-msg text-danger small mt-1 fw-bold";
         message.textContent = "Due date cannot be in the past.";
@@ -189,12 +191,16 @@ const submit = async function (event) {
         description = document.querySelector(".description"),
         dueDate = document.querySelector(".dueDate"),
         tasks = document.querySelector("#tasks"),
-        form = document.querySelector("#add-form");
+        form = document.querySelector("#add-form"),
+        today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const dueDateObj = new Date(dueDate.value)
+    dueDateObj.setHours(0, 0, 0, 0);
     
     const existingError = document.querySelector(".error-msg ");
     if (existingError) existingError.remove();
 
-    if (dueDate.value && new Date(dueDate.value) < new Date()) {
+    if (dueDate.value && dueDateObj < today) {
         const message = document.createElement("p");
         message.className = "error-msg text-danger small mt-1 fw-bold";
         message.textContent = "Due date cannot be in the past.";
