@@ -64,7 +64,7 @@ function showEditForm(li, task) {
                 <input type="date" class="form-control form-control-md flex-grow-1 dueDate" id="edit-due" value="${dateStr}">
             </div>
 
-            <div class="col-12 col-lg-3 d-flex align-items-center justify-content-end gap-1">
+            <div class="col-12 col-lg-3 d-flex align-items-center justify-content-end gap-2">
                 <button class="btn btn-sm btn-font btn-org save-btn">Save</button>
                 <button class="btn btn-sm btn-danger btn-font btn-red cancel-btn">Cancel</button>
             </div>
@@ -126,7 +126,7 @@ async function saveEdit(li) {
                 </div>
             </div>
 
-            <div class="d-flex flex-sm-row flex-column align-items-end gap-1">
+            <div class="d-flex flex-sm-row flex-column align-items-end gap-2">
                 <button class="btn btn-sm btn-font btn-org edit-btn">Edit</button>
                 <button class="btn btn-sm btn-danger btn-font btn-red delete-btn">Delete</button>
             </div>
@@ -155,7 +155,7 @@ function cancelEdit(li, task) {
                 </div>
             </div>
 
-            <div class="d-flex flex-sm-row flex-column align-items-end gap-1">
+            <div class="d-flex flex-sm-row flex-column align-items-end gap-2">
                 <button class="btn btn-sm btn-font btn-org edit-btn">Edit</button>
                 <button class="btn btn-sm btn-danger btn-font btn-red delete-btn">Delete</button>
             </div>
@@ -244,7 +244,7 @@ const submit = async function (event) {
                     </div>
                 </div>
 
-                <div class="d-flex flex-sm-row flex-column align-items-end gap-1">
+                <div class="d-flex flex-sm-row flex-column align-items-end gap-2">
                     <button class="btn btn-sm btn-font btn-org edit-btn">Edit</button>
                     <button class="btn btn-sm btn-danger btn-font btn-red delete-btn">Delete</button>
                 </div>
@@ -293,7 +293,7 @@ window.onload = async function () {
                         </div>
                     </div>
 
-                    <div class="d-flex flex-sm-row flex-column align-items-end gap-1">
+                    <div class="d-flex flex-sm-row flex-column align-items-end gap-2">
                         <button class="btn btn-sm btn-font btn-org edit-btn">Edit</button>
                         <button class="btn btn-sm btn-danger btn-font btn-red delete-btn">Delete</button>
                     </div>
