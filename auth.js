@@ -4,6 +4,10 @@ var express = require("express");
 var qs = require("querystring");
 var router = express.Router();
 
+const isProduction = process.env.NODE_ENV === "production";
+const RETURN_TO_URL = isProduction
+    ? "https://a3-ariannaxie.onrender.com/login"
+    : "http://localhost:3000/login";
 
 passport.use(
     new OpenIDConnectStrategy(
@@ -60,7 +64,7 @@ router.post("/logout", function (req, res, next) {
         req.session.destroy(() => {
             var params = {
                 client_id: process.env["AUTH0_CLIENT_ID"],
-                returnTo: "http://localhost:3000/login",
+                returnTo: RETURN_TO_URL,
             };
             res.redirect(
                 "https://" +
