@@ -2,7 +2,7 @@ h1, h2 {
     font-family: "Playfair Display", serif;
     font-weight: 700;
     font-style: normal;
-    font-size: 36px;
+    font-size: 38px;
     text-align: center;
     font-optical-sizing: auto;
     color: rgb(255, 250, 246);
@@ -45,19 +45,19 @@ body {
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
-    font-size: 15px;
+    font-size: 18px;
     padding: 9px 5px 9px 5px;
 }
 
 .btn-red {
-    background: rgb(216, 110, 110);
-    border-color: rgb(216, 110, 110);
+    background: rgb(181, 72, 72);
+    border-color: rgb(181, 72, 72);
     border-radius: 10px;
     min-width: 75px;
 } 
 .btn-red:hover, .btn-red:active {
-    background: rgb(181, 81, 81);
-    border-color: rgb(181, 81, 81);
+    background: rgb(133, 49, 49);
+    border-color: rgb(133, 49, 49);
 }
 
 .btn-org {

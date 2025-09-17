@@ -50,17 +50,17 @@ function showEditForm(li, task) {
     li.innerHTML = `
         <form class="row g-2 align-items-stretch" id="edit-form">
             <div class="col-12 col-lg-3 d-flex flex-column">
-                <label class="fw-bold small" for="edit-title">Task Title</label>
+                <label class="fw-bold" for="edit-title">Task Title</label>
                 <input type="text" class="form-control form-control-md flex-grow-1 title" id="edit-title" value="${task.title}">
             </div>
 
             <div class="col-12 col-lg-4 d-flex flex-column">
-                <label class="fw-bold small" for="edit-description">Task Description</label>
+                <label class="fw-bold" for="edit-description">Task Description</label>
                 <textarea class="form-control form-control-md flex-grow-1 description" id="edit-description">${task.description}</textarea>
             </div>
 
             <div class="col-12 col-lg-2 d-flex flex-column">
-                <label class="fw-bold small" for="edit-due">Task Due Date</label>
+                <label class="fw-bold" for="edit-due">Task Due Date</label>
                 <input type="date" class="form-control form-control-md flex-grow-1 dueDate" id="edit-due" value="${dateStr}">
             </div>
 
@@ -74,11 +74,25 @@ function showEditForm(li, task) {
 }
 
 async function saveEdit(li) {
-    const updatedTask = {
-        title: li.querySelector("#edit-title").value,
-        description: li.querySelector("#edit-description").value,
-        dueDate: new Date(li.querySelector("#edit-due").value)
+
+    const title = li.querySelector("#edit-title").value;
+    const description = li.querySelector("#edit-description").value;
+    const dueDate = new Date(li.querySelector("#edit-due").value);
+
+    // Show error message if due date is in the past
+    if (dueDate && dueDate < new Date()) {
+        const message = document.createElement("p");
+        message.className = "error-msg text-danger small mt-1 fw-bold";
+        message.textContent = "Due date cannot be in the past.";
+        li.appendChild(message);
+        return;
     }
+
+    // remove any previous error message
+    const prevError = li.querySelector(".error-msg");
+    if (prevError) prevError.remove();
+
+    const updatedTask = { title, description, dueDate };
 
     const response = await fetch(`/update/${li.dataset.id}`, {
         method: "PUT",
@@ -175,12 +189,25 @@ const submit = async function (event) {
         description = document.querySelector(".description"),
         dueDate = document.querySelector(".dueDate"),
         tasks = document.querySelector("#tasks"),
-        json = {
-            title: title.value,
-            description: description.value,
-            dueDate: dueDate.value,
-        },
-        body = JSON.stringify(json);
+        form = document.querySelector("#add-form");
+    
+    const existingError = document.querySelector(".error-msg ");
+    if (existingError) existingError.remove();
+
+    if (dueDate.value && new Date(dueDate.value) < new Date()) {
+        const message = document.createElement("p");
+        message.className = "error-msg text-danger small mt-1 fw-bold";
+        message.textContent = "Due date cannot be in the past.";
+        form.appendChild(message);
+        return;
+    }
+
+    const json = {
+        title: title.value,
+        description: description.value,
+        dueDate: dueDate.value,
+    },
+    body = JSON.stringify(json);
 
     // send to server through the /submit url and wait for response
     // can only use await in async function
@@ -235,9 +262,9 @@ const submit = async function (event) {
 // after the window is done loading, run this function
 // window.onload is an event
 window.onload = async function () {
+    // load tasks
     const tasksList = document.querySelector("#tasks");
     const button = document.querySelector(".submit-btn");
-
     button.onclick = submit;
 
     // get tasks from server
@@ -279,5 +306,4 @@ window.onload = async function () {
 
     tasksList.addEventListener("click", deleteTask);
     tasksList.addEventListener("click", editTask);
-
 };

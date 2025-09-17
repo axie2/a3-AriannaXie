@@ -1,9 +1,39 @@
 const express = require("express"),
-    app = express()
+    passport = require("passport"),
+    session = require("express-session"),
+    path = require("path"),
+    authRouter = require("./auth"),
+    app = express();
 
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }))
+app.use(express.static(path.join(__dirname, "public")));
 
+// session middleware to store and add user sessions for Auth0
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+    })
+);
+
+// initialize Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use("/", authRouter);
+
+// middleware to ensure user is authenticated and protect pages
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/login.html");
+}
+
+
+// DATABASE CONNECTION
 const { ObjectId } = require("mongodb");
 
 let collection;
@@ -55,6 +85,8 @@ middleware_db_check = (req, res, next) => {
 };
 app.use(middleware_db_check);
 
+
+// ROUTES
 // calculates days left until task due
 function calculateDaysDue(dueDateStr) {
     if (!dueDateStr) return null; 
@@ -66,8 +98,13 @@ function calculateDaysDue(dueDateStr) {
     return daysUntilDue;
 }
 
+// protect main page
+app.get("/", ensureAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, "app", "index.html"));
+});
+
 // get tasks from db
-app.get("/tasks", async (req, res) => {
+app.get("/tasks", ensureAuthenticated, async (req, res) => {
     try {
         const tasks = await collection.find({}).toArray();
         res.json(tasks);
@@ -78,7 +115,7 @@ app.get("/tasks", async (req, res) => {
 })
 
 // get a single task from db
-app.get("/tasks/:id", async (req, res) => {
+app.get("/tasks/:id", ensureAuthenticated, async (req, res) => {
     try {
         const taskID = req.params.id;
         const task = await collection.findOne({_id: new ObjectId(taskID)})
@@ -90,7 +127,7 @@ app.get("/tasks/:id", async (req, res) => {
 });
 
 // add a task
-app.post("/add", async (req, res) => {
+app.post("/add", ensureAuthenticated, async (req, res) => {
     // from req.body (data sent by client) get task info
     const { title, description, dueDate } = req.body;
 
@@ -106,7 +143,7 @@ app.post("/add", async (req, res) => {
 });
 
 // update a task
-app.put("/update/:id", async (req, res) => {
+app.put("/update/:id", ensureAuthenticated, async (req, res) => {
     const { title, description, dueDate } = req.body;
 
     daysUntilDue = calculateDaysDue(dueDate);
@@ -122,14 +159,12 @@ app.put("/update/:id", async (req, res) => {
 
 // remove a task
 // assumes req.body takes form { _id:5d91fb30f3f81b282d7be0dd } etc.
-app.delete( '/delete/:id', async (req,res) => {
+app.delete("/delete/:id", ensureAuthenticated, async (req,res) => {
     const result = await collection.deleteOne({
         _id: new ObjectId(req.params.id),
     });
     
     res.json( { success: result.deletedCount === 1 } );
 })
-
-
 
 app.listen(process.env.PORT || 3000);
