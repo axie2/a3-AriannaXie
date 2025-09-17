@@ -135,7 +135,7 @@ The goal of my application is a coffee-themed to-do list where users can log in,
 3. As I was refactoring my code from a2, I spent a lot of my time debugging, solving bugs ranging from the date displaying in a different timezone to the edit form not saving.
 4. When it came to styling, I had to Google how to install and use Bootstrap. I frequently referenced the Bootstrap documentation.
 5. I had to refer to Auth0 and Passport documentation to implement Auth0 into my application. I also had to Google how to add GitHub as an option for Auth0 sign in.
-6. When deploying my app to Railway, it kept crashing, and I realized it was because I had defined a start script for "node --env-file=.env server.js" and I had to take out the .env.
+6. When deploying my app to Render, I had to change the callback routes.
 
 ### Authentication Strategy
 - I chose to use Auth0 because it was mentioned in the assignment instructions and I had used it for Software Engineering.
@@ -164,9 +164,7 @@ The goal of my application is a coffee-themed to-do list where users can log in,
 ![Log In Page](./readme_images/LogIn.png)
 ![Auth0 Log In Page](./readme_images/Auth0.png)
 
-- **Tech Achievement 2**: 
-
-- **Tech Achievement 3**: I received a score of on my Lighthouse Test
+- **Tech Achievement 2**: I received a score of 100 on my Lighthouse Test
 ![Lighthouse Test Result](./readme_images/LighthouseTest.png)
 
 
@@ -194,9 +192,12 @@ Which element received the most emphasis (contrast) on each page? How did you us
 ![Application Overview](./readme_images/ApplicationOverview.png)
 ***Contrast***
 In my application, I used contrast in the colors and fonts. I wanted to make my application coffee-themed, so I wanted to stick with a color palette that fit the theme. Initially, I decided to go with browns and creams, but I wanted to add more color, so I added fall colors like yellow, green, and red as accent colors. To add more contrast to the application, I made the page color dark brown and the sections that sit on the page a lighter brown. Furthermore, I used the accent colors for the buttons to add even more contrast to the page and help them stick out. Besides the colors, I also added contrast to the fonts. I used a serif font for the headings and a sans serif font for the body content. I also made the font-size larger for the heading and subheadings to establish a visual hierarchy that way. To make the "log out" button stand out, I made the button color white.
+
 ***Repetition***
 For repetition, I used the same colors, fonts, and layouts throughout my application. I stuck to a color palette and a color for the sections' background, form elements, and task list. I also used the same color palette for the Auth0 Log In. Besides the colors, I also used the same fonts repeatedly. I used a serif font for the headings and a sans serif font for the body content and task items. Lastly, I used repetition in the layout. I made each of the form elements similar in style, and matched the layout of the "add a task" form to the layout of the "edit a task" form. In addition to the repetition in the form elements, I used repetition for the layout of each task. For each task, the layout is the same, even if they don't include pieces of information like the description. Lastly, I included repetition in the button layouts. The "edit" and "delete" button layout is the same as the "save" and "cancel" buttons.
+
 ***Alignment***
 For alignment, I used it to organize and increase contrast by the content by centering the heading and left-aligning the subheadings to make the heading stand out more. I also right-aligned the buttons inside the tasks (like the "edit," "delete," "save," and "cancel" buttons) and centered the text inside them to ensure that they would be aligned no matter the length of the text inside the task. In addition to this, I aligned the left side of the tasks (like the title/description row and the due-date/days-until-due row) to ensure they started on the same vertical line as each other. I also aligned the coffee bullet points and made sure that all the task text fell after the bullet point using alignment. On the Log In page, I aligned everything to have them all be centered on the page, so it would look uniform with the Auth0 Log In page.
+
 ***Proximity***
 Lastly, I used proximity to group the sections in my application and orgnaize the content on my page. I placed all the "Add a Task" items together to group those under a section and I placed all the "My To-Do List" items together to group them, creating a visual distinction between the two sections. Within the "Add a Task" section, I placed the form elements close together to group the form. Within the "My To-Do List" section, I placed the tasks close to each other to group the task list. Furthermore, I placed the task text together and the task action buttons (like the "edit" and "delete"buttons) together to create a distinction between the two. On the Log In page, I grouped the log-in heading and button together to distiguish them from the overall application heading/title.
