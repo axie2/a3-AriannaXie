@@ -241,7 +241,7 @@ const submit = async function (event) {
                             : ""
                     }
                 </div>
-                <div class="d-flex flex-column flex-sm-row align-items-center gap-1">
+                <div class="d-flex flex-column flex-sm-row align-items-center ms-1 gap-1">
                     <button class="btn btn-sm btn-font btn-org edit-btn">Edit</button>
                     <button class="btn btn-sm btn-danger btn-font btn-red delete-btn">Delete</button>
                 </div>
