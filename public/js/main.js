@@ -106,54 +106,54 @@ async function saveEdit(li) {
 
     li.innerHTML = `
         <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex flex-column flex-grow-1">
-                <div class="d-flex align-items-center">
-                    <span class="bullet me-2">☕</span>
+            <div class="d-flex flex-grow-1 align-items-start me-2">
+                <span class="bullet me-2">☕</span>
+                <div>
                     <span class="fw-bold">${task.title}</span>
                     ${task.description ? `: ${task.description}` : ""}
+                    ${
+                        task.dueDate
+                            ? `<div class="small">Due: ${formatDate(
+                                  task.dueDate
+                              )}</div>
+                            <div class="small">Days Until Due: ${
+                                task.daysUntilDue
+                            }</div>`
+                            : ""
+                    }
                 </div>
-                ${
-                    task.dueDate
-                        ? `<div class="small ms-4">(Due ${formatDate(
-                              task.dueDate
-                          )}) 
-                                        <span class="counter ms-2">Days Until Due: ${
-                                            task.daysUntilDue
-                                        }</span>
-                                </div>`
-                        : ""
-                }
             </div>
-            <div class="d-flex flex-column flex-sm-row align-items-center ms-1 gap-1">
+
+            <div class="d-flex flex-sm-row flex-column align-items-end gap-1">
                 <button class="btn btn-sm btn-font btn-org edit-btn">Edit</button>
                 <button class="btn btn-sm btn-danger btn-font btn-red delete-btn">Delete</button>
             </div>
-        </div>
+        </div>   
     `;
 }
 
 function cancelEdit(li, task) {
     li.innerHTML = `
         <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex flex-column flex-grow-1">
-                <div class="d-flex align-items-center">
-                    <span class="bullet me-2">☕</span>
+            <div class="d-flex flex-grow-1 align-items-start me-2">
+                <span class="bullet me-2">☕</span>
+                <div>
                     <span class="fw-bold">${task.title}</span>
                     ${task.description ? `: ${task.description}` : ""}
+                    ${
+                        task.dueDate
+                            ? `<div class="small">Due: ${formatDate(
+                                  task.dueDate
+                              )}</div>
+                            <div class="small">Days Until Due: ${
+                                task.daysUntilDue
+                            }</div>`
+                            : ""
+                    }
                 </div>
-                ${
-                    task.dueDate
-                        ? `<div class="small ms-4">(Due ${formatDate(
-                              task.dueDate
-                          )}) 
-                                        <span class="counter ms-2">Days Until Due: ${
-                                            task.daysUntilDue
-                                        }</span>
-                                </div>`
-                        : ""
-                }
             </div>
-            <div class="d-flex flex-column flex-sm-row align-items-center ms-1 gap-1">
+
+            <div class="d-flex flex-sm-row flex-column align-items-end gap-1">
                 <button class="btn btn-sm btn-font btn-org edit-btn">Edit</button>
                 <button class="btn btn-sm btn-danger btn-font btn-red delete-btn">Delete</button>
             </div>
@@ -223,29 +223,26 @@ const submit = async function (event) {
     tasks.innerHTML += `
         <li data-id="${task._id}" class="list-group-item list-bg">
             <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex flex-column flex-grow-1">
-                    <div class="d-flex align-items-center">
-                        <span class="bullet me-2">☕</span>
+
+                <div class="d-flex flex-grow-1 align-items-start me-2">
+                    <span class="bullet me-2">☕</span>
+                    <div>
                         <span class="fw-bold">${task.title}</span>
                         ${task.description ? `: ${task.description}` : ""}
+                        ${
+                            task.dueDate
+                                ? `<div class="small">Due: ${formatDate(task.dueDate)}</div>
+                                <div class="small">Days Until Due: ${task.daysUntilDue}</div>`
+                                : ""
+                        }
                     </div>
-                    ${
-                        task.dueDate
-                            ? `<div class="small ms-4">(Due ${formatDate(
-                                  task.dueDate
-                              )}) 
-                                            <span class="counter ms-2">Days Until Due: ${
-                                                task.daysUntilDue
-                                            }</span>
-                                    </div>`
-                            : ""
-                    }
                 </div>
-                <div class="d-flex flex-column flex-sm-row align-items-center ms-1 gap-1">
+
+                <div class="d-flex flex-sm-row flex-column align-items-end gap-1">
                     <button class="btn btn-sm btn-font btn-org edit-btn">Edit</button>
                     <button class="btn btn-sm btn-danger btn-font btn-red delete-btn">Delete</button>
                 </div>
-            </div>
+            </div>   
         </li>
     `;
 
@@ -275,30 +272,27 @@ window.onload = async function () {
         tasksList.innerHTML += `
             <li data-id="${task._id}" class="list-group-item list-bg">
                 <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex flex-column flex-grow-1">
-                        <div class="d-flex align-items-center">
-                            <span class="bullet me-2">☕</span>
+
+                    <div class="d-flex flex-grow-1 align-items-start me-2">
+                        <span class="bullet me-2">☕</span>
+                        <div>
                             <span class="fw-bold">${task.title}</span>
                             ${task.description ? `: ${task.description}` : ""}
+                            ${
+                                task.dueDate
+                                    ? `<div class="small">Due: ${formatDate(task.dueDate)}</div>
+                                    <div class="small">Days Until Due: ${task.daysUntilDue}</div>`
+                                    : ""
+                            }
                         </div>
-                        ${
-                            task.dueDate
-                                ? `<div class="small ms-4">(Due ${formatDate(
-                                      task.dueDate
-                                  )}) 
-                                                <span class="counter ms-2">Days Until Due: ${
-                                                    task.daysUntilDue
-                                                }</span>
-                                        </div>`
-                                : ""
-                        }
                     </div>
-                    <div class="d-flex flex-column flex-sm-row align-items-center ms-1 gap-1">
+
+                    <div class="d-flex flex-sm-row flex-column align-items-end gap-1">
                         <button class="btn btn-sm btn-font btn-org edit-btn">Edit</button>
                         <button class="btn btn-sm btn-danger btn-font btn-red delete-btn">Delete</button>
                     </div>
-                </div>
-            </li>
+                </div>   
+             </li>
         `;
     });
 
