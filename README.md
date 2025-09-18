@@ -64,11 +64,11 @@ The goal of my application is a coffee-themed to-do list where users can log in,
 - **Design Achievement 1**: I followed the following tips from the W3C Web Accessibility Initiative...
 1. Provide informative, unique page titles: I named my pages Coffee To-Do List and Sign In
 <img src="./readme_images/Tip1.png" alt="Application Page Title" width="300"/>
-<img src="./readme_images/Tip1SignIn.png" alt="Application Page Title" width="300"/>
+<img src="./readme_images/Tip1SignIn.png" alt="Sign In Page Title" width="300"/>
 
 2. Use headings to convey meaning and structure: I made the heading "To-Do List" and subheadings "Add a Task" and "My To-Do List"
 3. Write code that adapts to the user’s technology: I made the page responsive to page resizing.
-<img src="./readme_images/ResizedPage.jpeg" alt="Forms on Resized Page" width="600"/>
+<img src="./readme_images/ResizedPage.png" alt="Forms on Resized Page" width="600"/>
 <img src="./readme_images/PhoneView.jpeg" alt="Phone View" width="300"/>
 
 4. Keep content clear and concise: I made the form labels clear and concise
@@ -84,8 +84,8 @@ The goal of my application is a coffee-themed to-do list where users can log in,
 
 
 - **Design Achievement 2**: CRAP Design Principles
-Which element received the most emphasis (contrast) on each page? How did you use proximity to organize the visual information on your page? What design elements (colors, fonts, layouts, etc.) did you use repeatedly throughout your site? How did you use alignment to organize information and/or increase contrast for particular elements. Write a paragraph of at least 125 words *for each of four principles* (four paragraphs, 500 words in total).
 ![Application Overview](./readme_images/ApplicationOverview.png)
+
 ***Contrast***
 In my application, I used contrast in the colors and fonts. I wanted to make my application coffee-themed, so I wanted to stick with a color palette that fit the theme. Initially, I decided to go with browns and creams, but I wanted to add more color, so I added fall colors like yellow, green, and red as accent colors. To add more contrast to the application, I made the page color dark brown and the sections that sit on the page a lighter brown. Furthermore, I used the accent colors for the buttons to add even more contrast to the page and help them stick out. Besides the colors, I also added contrast to the fonts. I used a serif font for the headings and a sans serif font for the body content. I also made the font-size larger for the heading and subheadings to establish a visual hierarchy that way. To make the "log out" button stand out, I made the button color white.
 
