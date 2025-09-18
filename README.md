@@ -51,8 +51,9 @@ The goal of my application is a coffee-themed to-do list where users can log in,
 
 ## Technical Achievements
 - **Tech Achievement 1**: I used Auth0 authentication via the Passport strategy
-![Log In Page](./readme_images/LogIn.png)
-![Auth0 Log In Page](./readme_images/Auth0.png)
+<img src="./readme_images/LogIn.png" alt="Log In Page" width="600"/>
+<img src="./readme_images/Auth0.png" alt="Auth0 Log In Page" width="600"/>
+
 
 - **Tech Achievement 2**: I received a score of 100 on my Lighthouse Test
 ![Lighthouse Test Result](./readme_images/LighthouseTest.png)
@@ -62,11 +63,14 @@ The goal of my application is a coffee-themed to-do list where users can log in,
 ![Application Overview](./readme_images/ApplicationOverview.png)
 - **Design Achievement 1**: I followed the following tips from the W3C Web Accessibility Initiative...
 1. Provide informative, unique page titles: I named my pages Coffee To-Do List and Sign In
-![Application Page Title](./readme_images/Tip1.png)
+<img src="./readme_images/Tip1.png" alt="Application Page Title" width="300"/>
+<img src="./readme_images/Tip1SignIn.png" alt="Application Page Title" width="300"/>
+
 2. Use headings to convey meaning and structure: I made the heading "To-Do List" and subheadings "Add a Task" and "My To-Do List"
 3. Write code that adapts to the user’s technology: I made the page responsive to page resizing.
-![Forms on Resized Page](./readme_images/ResizedPage.png)
+<img src="./readme_images/ResizedPage.jpeg" alt="Forms on Resized Page" width="600"/>
 <img src="./readme_images/PhoneView.jpeg" alt="Phone View" width="300"/>
+
 4. Keep content clear and concise: I made the form labels clear and concise
 5. Provide sufficient contrast between foreground and background: I made sure there is contrast between the page color, sections color, list items color, buttons, and text.
 6. Don’t use color alone to convey information: I put labels on the red buttons like Delete and Cancel
