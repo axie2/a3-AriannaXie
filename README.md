@@ -64,8 +64,9 @@ The goal of my application is a coffee-themed to-do list where users can log in,
 1. Provide informative, unique page titles: I named my pages Coffee To-Do List and Sign In
 ![Application Page Title](./readme_images/Tip1.png)
 2. Use headings to convey meaning and structure: I made the heading "To-Do List" and subheadings "Add a Task" and "My To-Do List"
-3. Write code that adapts to the user’s technology: I made the page responsive to page resizing
+3. Write code that adapts to the user’s technology: I made the page responsive to page resizing.
 ![Forms on Resized Page](./readme_images/ResizedPage.png)
+![Phone View](./readme_images/PhoneView.png)
 4. Keep content clear and concise: I made the form labels clear and concise
 5. Provide sufficient contrast between foreground and background: I made sure there is contrast between the page color, sections color, list items color, buttons, and text.
 6. Don’t use color alone to convey information: I put labels on the red buttons like Delete and Cancel
